@@ -1,0 +1,87 @@
+{
+  "name": "project-cleanup",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/copy-manifest.mjs"
+  },
+  "devDependencies": {
+    "vite": "^7.3.5"
+  },
+  "muxy": {
+    "$schema": "https://raw.githubusercontent.com/muxy-app/muxy/main/docs/extensions/schema/manifest.schema.json",
+    "description": "Clean up your project list — multi-select delete, or find and remove every project whose folder is gone.",
+    "permissions": [
+      "panels:write",
+      "commands:exec",
+      "projects:read",
+      "projects:delete"
+    ],
+    "events": [
+      "projects.changed"
+    ],
+    "commands": [
+      {
+        "id": "toggle-cleanup",
+        "title": "Project Cleanup: Toggle Panel",
+        "action": {
+          "kind": "togglePanel",
+          "panel": "cleanup"
+        }
+      },
+      {
+        "id": "refresh-cleanup",
+        "title": "Project Cleanup: Refresh"
+      }
+    ],
+    "panels": [
+      {
+        "id": "cleanup",
+        "title": "Project Cleanup",
+        "icon": {
+          "symbol": "folder.badge.minus"
+        },
+        "entry": "panel/index.html",
+        "position": "right",
+        "mode": "floating",
+        "headerButtons": [
+          {
+            "id": "refresh",
+            "icon": {
+              "symbol": "arrow.clockwise"
+            },
+            "tooltip": "Refresh",
+            "command": "refresh-cleanup"
+          }
+        ]
+      }
+    ],
+    "topbarItems": [
+      {
+        "id": "cleanup",
+        "icon": {
+          "symbol": "folder.badge.minus"
+        },
+        "tooltip": "Toggle Project Cleanup",
+        "command": "toggle-cleanup"
+      }
+    ],
+    "marketplace": {
+      "author": "Eric Marchand",
+      "github": "phimage",
+      "categories": [
+        "productivity",
+        "developer-tools"
+      ],
+      "icon": "icon.svg",
+      "screenshots": [
+        "screenshots/screenshot-1.png"
+      ]
+    }
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

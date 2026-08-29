@@ -1,0 +1,102 @@
+@import "@muxy/ui/ui.css";
+
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font-family: var(--font-ui);
+  font-size: var(--font-body);
+  background: var(--muxy-background);
+  color: var(--muxy-foreground);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.cleanup-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cleanup-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s4);
+  margin: 0 var(--s5) var(--s3);
+  padding: var(--s4);
+  font-size: var(--font-footnote);
+  line-height: 1.4;
+  color: var(--muxy-foreground-muted);
+  background: var(--muxy-surface);
+  border: 1px solid var(--muxy-border);
+  border-radius: var(--radius);
+}
+
+.cleanup-list {
+  flex: 1;
+}
+
+.cleanup-checkbox {
+  width: var(--s6);
+  height: var(--s6);
+  flex-shrink: 0;
+  accent-color: var(--muxy-accent);
+}
+
+.cleanup-row-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cleanup-row-name {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  overflow: hidden;
+}
+
+.cleanup-row-name span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cleanup-badge-missing {
+  color: var(--muxy-diff-remove);
+  border-color: color-mix(in srgb, var(--muxy-diff-remove) 40%, transparent);
+}
+
+.cleanup-footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  padding: var(--s4) var(--s5);
+  border-top: 1px solid var(--muxy-border);
+}
