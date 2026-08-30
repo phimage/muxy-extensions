@@ -1,0 +1,95 @@
+{
+  "name": "media-launcher",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/postbuild.mjs"
+  },
+  "devDependencies": {
+    "vite": "^7.3.5"
+  },
+  "muxy": {
+    "$schema": "https://raw.githubusercontent.com/muxy-app/muxy/main/docs/extensions/schema/manifest.schema.json",
+    "description": "One tab to launch your streaming and cloud-gaming services in the built-in browser, with your sessions kept intact.",
+    "background": "background.js",
+    "permissions": [
+      "browser:read",
+      "browser:write",
+      "commands:exec",
+      "tabs:read",
+      "tabs:write",
+      "agents:read",
+      "storage:read",
+      "storage:write",
+      "panels:write",
+      "notifications:write"
+    ],
+    "events": [
+      "agent.status",
+      "tab.focused",
+      "tab.closed"
+    ],
+    "tabTypes": [
+      {
+        "id": "media-launcher",
+        "title": "Media Launcher",
+        "entry": "tabs/launcher.html"
+      }
+    ],
+    "commands": [
+      {
+        "id": "open-media-launcher",
+        "title": "Media Launcher: Open",
+        "subtitle": "Open the media launcher tab, or focus the one already open",
+        "action": {
+          "kind": "event"
+        }
+      },
+      {
+        "id": "hide-media",
+        "title": "Media Launcher: Hide media",
+        "subtitle": "Pause the media browser and switch away from it",
+        "defaultShortcut": "cmd+ctrl+m",
+        "action": {
+          "kind": "event"
+        }
+      }
+    ],
+    "statusBarItems": [
+      {
+        "id": "media-launcher",
+        "icon": {
+          "symbol": "play.rectangle.on.rectangle"
+        },
+        "tooltip": "Open Media Launcher",
+        "side": "right",
+        "command": "open-media-launcher"
+      },
+      {
+        "id": "media-launcher-hide",
+        "icon": {
+          "symbol": "eye.slash"
+        },
+        "tooltip": "Hide the media browser",
+        "side": "right",
+        "command": "hide-media"
+      }
+    ],
+    "marketplace": {
+      "author": "phimage",
+      "github": "phimage",
+      "repository": "https://github.com/muxy-app/extensions",
+      "categories": [
+        "media",
+        "productivity",
+        "web"
+      ],
+      "icon": "marketplace/icon.svg",
+      "screenshots": [
+        "marketplace/screenshot-1.png"
+      ]
+    }
+  }
+}

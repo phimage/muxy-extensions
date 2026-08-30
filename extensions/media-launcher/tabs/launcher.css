@@ -1,0 +1,654 @@
+:root {
+  --s1: 2px;
+  --s2: 4px;
+  --s3: 6px;
+  --s4: 8px;
+  --s5: 10px;
+  --s6: 12px;
+  --s7: 16px;
+  --s8: 20px;
+  --s9: 24px;
+  --s10: 32px;
+
+  --font-caption: 10px;
+  --font-body: 12px;
+  --font-emphasis: 13px;
+  --font-title: 15px;
+
+  --icon: 14px;
+  --control: 24px;
+
+  --radius-chip: 4px;
+  --radius: 6px;
+  --radius-card: 8px;
+  --radius-lg: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font: var(--font-emphasis) -apple-system, "SF Pro", system-ui, sans-serif;
+  background: var(--muxy-background);
+  color: var(--muxy-foreground);
+  overflow: hidden;
+}
+
+.launcher-app {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: var(--s4);
+  padding: var(--s4) var(--s6);
+}
+
+/* topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s5);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--s5);
+  min-width: 0;
+}
+
+.topbar-icon {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--muxy-foreground);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.9;
+}
+
+.topbar-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.topbar-titles h1 {
+  font-size: var(--font-title);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: 0.1px;
+}
+
+.topbar-profile {
+  font-size: var(--font-caption);
+  color: var(--muxy-foreground-muted);
+  letter-spacing: 0.2px;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.action-icon {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.action-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  height: 26px;
+  padding: 0 var(--s5);
+  border: 1px solid var(--muxy-border);
+  border-radius: var(--radius);
+  background: var(--muxy-surface-solid);
+  color: var(--muxy-foreground);
+  font: 500 var(--font-body) -apple-system, "SF Pro", system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background: var(--muxy-hover);
+}
+
+.action-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--muxy-accent);
+}
+
+/* auto-pause toggle */
+.toggle-btn {
+  color: var(--muxy-foreground-muted);
+}
+
+.toggle-btn .toggle-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background: var(--muxy-border);
+  border: 1px solid var(--muxy-border);
+}
+
+.toggle-btn.is-on {
+  color: var(--muxy-foreground);
+  border-color: var(--muxy-accent);
+}
+
+.toggle-btn.is-on .toggle-dot {
+  background: var(--muxy-accent);
+  border-color: var(--muxy-accent);
+}
+
+.toggle-btn.is-paused {
+  background: var(--muxy-accent-soft);
+  color: var(--muxy-accent);
+}
+
+.icon-btn {
+  padding: 0 var(--s4);
+}
+
+/* grid */
+.grid-wrap {
+  overflow: auto;
+  min-height: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--s5);
+  align-content: start;
+  padding: var(--s2);
+  min-height: 0;
+}
+
+.card-sep {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  margin: var(--s3) 0 0;
+}
+
+.card-sep .sep-label {
+  font-size: var(--font-caption);
+  font-weight: 600;
+  color: var(--muxy-foreground-muted);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.card-sep .sep-line {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--muxy-border);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 110px;
+  padding: var(--s6);
+  border: 1px solid var(--muxy-border);
+  border-radius: var(--radius-lg);
+  background: var(--muxy-surface-solid);
+  cursor: grab;
+  user-select: none;
+  transition: border-color 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 0 0 transparent;
+}
+
+.card:hover {
+  border-color: var(--muxy-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+.card.is-dragging {
+  opacity: 0.35;
+  cursor: grabbing;
+}
+
+.card.is-drop-target {
+  border-color: var(--muxy-accent);
+  box-shadow: 0 0 0 2px var(--muxy-accent);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+}
+
+.brand {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.brand.mono {
+  width: 22px;
+  height: 22px;
+  color: var(--muxy-foreground);
+}
+
+.card h2 {
+  font-size: var(--font-emphasis);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-top: var(--s6);
+}
+
+.chip {
+  font-size: var(--font-caption);
+  padding: 3px 8px;
+  border-radius: var(--radius-chip);
+  background: var(--muxy-hover);
+  color: var(--muxy-foreground-muted);
+  letter-spacing: 0.2px;
+  max-width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chip.url-chip {
+  color: var(--muxy-foreground);
+}
+
+.open-btn,
+.remove-btn {
+  appearance: none;
+  border: 1px solid var(--muxy-border);
+  background: transparent;
+  color: var(--muxy-foreground);
+  font: 500 var(--font-body) -apple-system, "SF Pro", system-ui, sans-serif;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin: 0;
+}
+
+.open-btn:hover,
+.remove-btn:hover {
+  background: var(--muxy-hover);
+  border-color: var(--muxy-accent);
+  color: var(--muxy-accent);
+}
+
+.open-btn:focus-visible,
+.remove-btn:focus-visible,
+.ghost-btn:focus-visible,
+.primary-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--muxy-accent);
+}
+
+.remove-btn {
+  color: var(--muxy-foreground-muted);
+}
+
+.card.custom {
+  opacity: 0.96;
+}
+
+.ghost-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s3);
+  border: 1px solid var(--muxy-border);
+  background: transparent;
+  color: var(--muxy-foreground-muted);
+  font: 500 var(--font-body) -apple-system, "SF Pro", system-ui, sans-serif;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.ghost-btn:hover {
+  background: var(--muxy-hover);
+  color: var(--muxy-foreground);
+}
+
+.primary-btn {
+  appearance: none;
+  border: 1px solid var(--muxy-accent);
+  background: var(--muxy-accent);
+  color: var(--muxy-accent-foreground);
+  font: 500 var(--font-emphasis) -apple-system, "SF Pro", system-ui, sans-serif;
+  padding: 5px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.08);
+}
+
+/* footer */
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s5);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--muxy-border);
+}
+
+.foot p {
+  margin: 0;
+  font-size: var(--font-caption);
+  color: var(--muxy-foreground-muted);
+}
+
+.foot-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  flex: 0 0 auto;
+}
+
+/* dialog */
+dialog {
+  margin: auto;
+  padding: 0;
+  max-height: calc(100vh - var(--s10));
+  overflow: hidden;
+  border: 1px solid var(--muxy-border);
+  border-radius: var(--radius-lg);
+  background: var(--muxy-surface-solid);
+  color: var(--muxy-foreground);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  max-width: 420px;
+  width: calc(100% - 40px);
+}
+
+/* A tab pane can be short: let the dialog scroll rather than clip its content. */
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+#url-dialog-form,
+#settings-form {
+  overflow-y: auto;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+#url-dialog-form,
+#settings-form {
+  padding: var(--s7);
+  display: grid;
+  gap: var(--s4);
+}
+
+#settings-dialog {
+  max-width: 460px;
+}
+
+#url-dialog-title,
+.d-title {
+  margin: 0;
+  font-size: var(--font-title);
+  font-weight: 600;
+}
+
+.d-desc {
+  margin: 0;
+  font-size: var(--font-body);
+  color: var(--muxy-foreground-muted);
+}
+
+.d-label {
+  font-size: var(--font-caption);
+  color: var(--muxy-foreground-muted);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+#url-dialog-input,
+#url-dialog-name {
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  border: 1px solid var(--muxy-border);
+  border-radius: var(--radius);
+  background: var(--muxy-background);
+  color: var(--muxy-foreground);
+  padding: 0 var(--s4);
+  font: 400 var(--font-emphasis) -apple-system, "SF Pro", system-ui, sans-serif;
+}
+
+#url-dialog-input:focus,
+#url-dialog-name:focus {
+  outline: none;
+  border-color: var(--muxy-accent);
+  box-shadow: 0 0 0 2px var(--muxy-accent);
+}
+
+.d-group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: var(--s2);
+}
+
+.d-group > legend {
+  padding: 0;
+  margin-bottom: var(--s3);
+}
+
+.d-group .d-desc {
+  margin-bottom: var(--s3);
+}
+
+.d-group + .d-group {
+  margin-top: var(--s4);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--muxy-border);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s6);
+  padding: var(--s3) 0;
+  cursor: pointer;
+}
+
+.row-text {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.row-title {
+  font-size: var(--font-body);
+  font-weight: 500;
+}
+
+.row-hint {
+  font-size: var(--font-caption);
+  color: var(--muxy-foreground-muted);
+}
+
+.row-hint code {
+  font: inherit;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.switch {
+  appearance: none;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 18px;
+  margin: 0;
+  border: 1px solid var(--muxy-border);
+  border-radius: 9px;
+  background: var(--muxy-background);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--muxy-foreground-muted);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.switch:checked {
+  background: var(--muxy-accent);
+  border-color: var(--muxy-accent);
+}
+
+.switch:checked::after {
+  background: var(--muxy-accent-foreground);
+  transform: translateX(12px);
+}
+
+.switch:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--muxy-accent);
+}
+
+.select-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  color: var(--muxy-foreground);
+}
+
+.select-wrap::after {
+  content: "";
+  position: absolute;
+  right: var(--s5);
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  pointer-events: none;
+}
+
+.select {
+  appearance: none;
+  width: 100%;
+  height: 24px;
+  padding: 0 var(--s9) 0 var(--s4);
+  border: 1px solid var(--muxy-border);
+  border-radius: var(--radius);
+  background: var(--muxy-background);
+  color: var(--muxy-foreground);
+  font: 500 var(--font-body) -apple-system, "SF Pro", system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.select:focus-visible {
+  outline: none;
+  border-color: var(--muxy-accent);
+  box-shadow: 0 0 0 2px var(--muxy-accent);
+}
+
+.d-group.is-off .row:not(.row-master) {
+  opacity: 0.5;
+}
+
+.d-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s3);
+  margin-top: var(--s2);
+}
+
+@media (max-width: 620px) {
+  .launcher-app {
+    padding: var(--s3);
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--s4);
+  }
+  .card {
+    min-height: 96px;
+    padding: var(--s5);
+  }
+  .foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .foot-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .switch,
+  .switch::after {
+    transition: none;
+  }
+}

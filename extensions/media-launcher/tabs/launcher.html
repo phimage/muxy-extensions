@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Launcher</title>
+  <link rel="stylesheet" href="./launcher.css">
+</head>
+<body>
+  <main class="launcher-app">
+    <header class="topbar">
+      <div class="topbar-left">
+        <svg class="topbar-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+          <path d="M7 11l5-5 5 5"></path>
+          <path d="M10 11v-4"></path>
+        </svg>
+        <div class="topbar-titles">
+          <h1>Media Launcher</h1>
+          <span id="session-profile" class="topbar-profile">default profile</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button id="autopause-toggle" type="button" class="action-btn toggle-btn" role="switch" aria-checked="false"
+                title="Pause playback while a coding agent is waiting for your answer">
+          <span class="toggle-dot" aria-hidden="true"></span>
+          <span id="autopause-label">Auto-pause</span>
+        </button>
+        <button id="open-settings" type="button" class="action-btn icon-btn" title="Settings" aria-label="Settings">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"></path>
+          </svg>
+        </button>
+        <button id="open-custom" type="button" class="action-btn" title="Open a custom URL">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 3h6v6"></path>
+            <path d="M10 14L21 3"></path>
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+          </svg>
+          <span>URL…</span>
+        </button>
+      </div>
+    </header>
+
+    <section id="grid" class="grid" aria-label="Services">
+      <article class="card" data-id="youtube" data-url="https://www.youtube.com" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="YouTube">
+            <path fill="#FF0033" d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 00.5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 002.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 002.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81z"></path>
+            <path fill="#fff" d="M9.55 15.57L15.82 12 9.55 8.43z"></path>
+          </svg>
+          <h2>YouTube</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Signed in</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="netflix" data-url="https://www.netflix.com/browse" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Netflix">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#E50914"></rect>
+            <path d="M8.4 17V7l7.2 10V7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <h2>Netflix</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Signed in</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="twitch" data-url="https://www.twitch.tv" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Twitch">
+            <path fill="#9146FF" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"></path>
+          </svg>
+          <h2>Twitch</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Live + VOD</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="prime" data-url="https://www.primevideo.com/" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Amazon Prime Video">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#00A8E1"></rect>
+            <path d="M9 15.4V8h2.8a2.5 2.5 0 010 5H9" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8 17.4c2.1 1.2 4.6 1.2 6.7.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"></path>
+          </svg>
+          <h2>Prime Video</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Signed in</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="crunchyroll" data-url="https://www.crunchyroll.com" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Crunchyroll">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#F47521"></rect>
+            <path d="M15.6 9.2a4.6 4.6 0 1 0 0 5.6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path>
+          </svg>
+          <h2>Crunchyroll</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Anime</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="disney" data-url="https://www.disneyplus.com" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Disney+">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#0E2250"></rect>
+            <path d="M3 6s12.29-2 13.91 6.77c1.09 5.93-6.58 6.7-9.48 5.89S3 16.06 3 14.06C3 11 8.54 9.45 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M19 3V7m2-2H17M6.69 9l2 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <h2>Disney+</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Signed in</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="paramount" data-url="https://www.paramountplus.com" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Paramount+">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#1E40AF"></rect>
+            <path d="M5 17l4.5-8 2.6 4.5 2-3.2L19 17z" fill="#fff"></path>
+          </svg>
+          <h2>Paramount+</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Signed in</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="hbo-max" data-url="https://www.hbomax.com" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="HBO Max">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#6C1F9E"></rect>
+            <path d="M6 17V8l6 6 6-6v9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <h2>HBO Max</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Signed in</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="apple-tv-plus" data-url="https://tv.apple.com" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Apple TV+">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#000"></rect>
+            <path fill="#fff" d="M15.4 12.1c0-1.3.9-1.9 1.1-2-.65-.97-1.65-1.1-2-1.12-.86-.1-1.67.5-2.1.5-.43 0-1.1-.48-1.82-.47-.94.01-1.81.54-2.3 1.39-.98 1.71-.26 4.24.69 5.64.47.69 1.02 1.46 1.74 1.43.68-.03.95-.44 1.78-.44.83 0 1.06.44 1.79.43.74-.01 1.2-.66 1.66-1.35.53-.79.75-1.57.76-1.6-.02-.01-1.45-.56-1.46-2.2z"></path>
+            <path fill="#fff" d="M13.75 7.95c.39-.47.66-1.13.58-1.78-.56.02-1.24.37-1.65.84-.36.43-.69 1.09-.6 1.73.64.05 1.28-.32 1.67-.79z"></path>
+          </svg>
+          <h2>Apple TV+</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Signed in</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <div class="card-sep" role="separator" aria-label="Cloud gaming">
+        <span class="sep-label">Cloud gaming</span>
+        <span class="sep-line" aria-hidden="true"></span>
+      </div>
+
+      <article class="card cloud" data-id="geforcenow" data-url="https://play.geforcenow.com" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="NVIDIA GeForce Now">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#76B900"></rect>
+            <path d="M12 4.9a7.1 7.1 0 11-7.1 7.1" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"></path>
+            <path d="M12 7.9a4.1 4.1 0 11-4.1 4.1" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"></path>
+            <circle cx="12" cy="12" r="1.3" fill="#fff"></circle>
+          </svg>
+          <h2>GeForce Now</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Cloud gaming</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card cloud" data-id="xbxcloud" data-url="https://www.xbox.com/en-fr/play" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Xbox Cloud Gaming">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#107C10"></rect>
+            <g fill="#fff" transform="rotate(45 12 12)">
+              <path d="M12 12C10 9.6 10 6.4 12 4C14 6.4 14 9.6 12 12Z"></path>
+              <path d="M12 12C14 14.4 14 17.6 12 20C10 17.6 10 14.4 12 12Z"></path>
+              <path d="M12 12C9.6 10 6.4 10 4 12C6.4 14 9.6 14 12 12Z"></path>
+              <path d="M12 12C14.4 14 17.6 14 20 12C17.6 10 14.4 10 12 12Z"></path>
+            </g>
+          </svg>
+          <h2>Xbox Cloud</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Game Pass</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card cloud" data-id="amazon-luna" data-url="https://app.luna.amazon.com" data-default>
+        <div class="card-head">
+          <svg class="brand" viewBox="0 0 24 24" role="img" aria-label="Amazon Luna">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="#4B2E8B"></rect>
+            <g fill="#fff">
+              <circle cx="10" cy="13" r="3.4"></circle>
+              <circle cx="14.2" cy="11.8" r="4"></circle>
+              <rect x="8" y="13" width="9.4" height="3.4" rx="1.7"></rect>
+            </g>
+          </svg>
+          <h2>Amazon Luna</h2>
+        </div>
+        <div class="card-foot">
+          <span class="chip">Cloud gaming</span>
+          <button class="open-btn" type="button">Open</button>
+        </div>
+      </article>
+
+      <article class="card custom" id="custom-card" hidden>
+        <div class="card-head">
+          <svg class="brand mono" viewBox="0 0 24 24" role="img" aria-label="Custom">
+            <rect x="2" y="2" width="20" height="20" rx="3" fill="var(--muxy-surface-solid)"></rect>
+            <path d="M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"></path>
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"></path>
+          </svg>
+          <h2 id="custom-title">Custom</h2>
+        </div>
+        <div class="card-foot">
+          <span id="custom-url-label" class="chip url-chip"></span>
+          <button class="remove-btn" id="remove-custom" type="button" title="Remove this shortcut">Remove</button>
+        </div>
+      </article>
+    </section>
+
+    <footer class="foot">
+      <p id="foot-note">
+        Services open in Muxy's built-in browser, on the default profile.
+        If a service refuses to start here, open it in your system browser.
+      </p>
+      <div class="foot-actions">
+        <button id="open-external-first" type="button" class="ghost-btn" title="Open the last opened service in Safari/Chrome">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 17L17 7"></path>
+            <path d="M8 7h9v9"></path>
+          </svg>
+          <span>Open in system browser</span>
+        </button>
+        <button id="reset-layout" type="button" class="ghost-btn" title="Reset the order and shortcuts">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 12a9 9 0 109-9 9.7 9.7 0 00-6.7 2.8L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </footer>
+  </main>
+
+  <dialog id="url-dialog">
+    <form method="dialog" id="url-dialog-form">
+      <h2 id="url-dialog-title">New shortcut</h2>
+      <p class="d-desc">Creates a custom tile that opens in Muxy's built-in browser.</p>
+      <label class="d-label" for="url-dialog-input">Service URL</label>
+      <input id="url-dialog-input" type="text" inputmode="url" required spellcheck="false" placeholder="https://myservice.example" autocomplete="off" autofocus />
+      <label class="d-label" for="url-dialog-name">Name (optional)</label>
+      <input id="url-dialog-name" type="text" placeholder="Shortcut name" autocomplete="off" />
+      <div class="d-actions">
+        <button type="button" class="ghost-btn" id="url-dialog-cancel">Cancel</button>
+        <button type="submit" class="primary-btn">Add</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="settings-dialog">
+    <form method="dialog" id="settings-form">
+      <h2 class="d-title">Settings</h2>
+
+      <fieldset class="d-group">
+        <legend class="d-label">Playback and agents</legend>
+        <p class="d-desc">Media plays while the agents are busy, and pauses when it is your turn. Pick which moments count.</p>
+
+        <label class="row row-master">
+          <span class="row-text">
+            <span class="row-title">Auto-pause</span>
+            <span class="row-hint">Master switch. Needs the <code>muxy</code> CLI; the first run asks for consent.</span>
+          </span>
+          <input type="checkbox" class="switch" name="enabled" />
+        </label>
+
+        <label class="row">
+          <span class="row-text">
+            <span class="row-title">Pause when an agent needs your answer</span>
+            <span class="row-hint">A permission prompt, a plan to approve, a question.</span>
+          </span>
+          <input type="checkbox" class="switch" name="pauseOnWaiting" />
+        </label>
+
+        <label class="row">
+          <span class="row-text">
+            <span class="row-title">Pause when an agent finishes</span>
+            <span class="row-hint">Time to review what it did.</span>
+          </span>
+          <span class="select-wrap">
+            <select name="pauseOnIdle" class="select">
+              <option value="off">Never</option>
+              <option value="all">When all are done</option>
+              <option value="any">When any finishes</option>
+            </select>
+          </span>
+        </label>
+
+        <label class="row">
+          <span class="row-text">
+            <span class="row-title">Resume when agents get back to work</span>
+            <span class="row-hint">After you answer, or when you launch a new prompt.</span>
+          </span>
+          <input type="checkbox" class="switch" name="resumeOnWorking" />
+        </label>
+
+        <label class="row">
+          <span class="row-text">
+            <span class="row-title">Resume when you switch to the media tab</span>
+            <span class="row-hint">Even while an agent is still waiting.</span>
+          </span>
+          <input type="checkbox" class="switch" name="resumeOnFocus" />
+        </label>
+      </fieldset>
+
+      <fieldset class="d-group">
+        <legend class="d-label">Launcher</legend>
+        <label class="row">
+          <span class="row-text">
+            <span class="row-title">Open services in the same browser tab</span>
+            <span class="row-hint">One media tab to manage instead of a new one per service.</span>
+          </span>
+          <input type="checkbox" class="switch" name="reuseTab" />
+        </label>
+      </fieldset>
+
+      <div class="d-actions">
+        <button type="submit" class="primary-btn">Done</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="./launcher.js"></script>
+</body>
+</html>
